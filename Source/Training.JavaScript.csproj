@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1. Functional Programmingming\index.html" />
-    <Content Include="1. Functional Programmingming\script1.js" />
+    <Content Include="1. Functional Programmingming\script.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
