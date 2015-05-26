@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>1. Functions</title>
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript">
+        var data = [1, 2, 3, 4, 5];
+
+        //#1 Partial Application
+        var divideFn = function (a, b) { return a / b; }        //𝐺(𝑥,𝑦,𝑧 ...)
+        var hyperbolaFn = partialFn(1, divideFn);               //𝐹(𝑥, 𝐺(𝑥,𝑦,𝑧 ...))
+        var result = hyperbolaFn(5);                            //𝐻(𝑦,𝑧…)
+
+        //#2 Curry
+        var sumFn = function (a, b, c) { return a + b + c; };   //𝑓(𝑥,𝑦,𝑧)
+        var currySumFn = curryFn(sumFn);                        //𝑐𝑢𝑟𝑟𝑦(𝑓) = 𝑥→(𝑦→(𝑧→𝑁))
+        var result1 = currySumFn(1);
+        var result2 = currySumFn(2);
+        var result3 = currySumFn(3);
+        var result = currySumFn(1)(2)(3);
+
+        //#3 Reduce
+        var sum = data.reduceFn(function (prev, cur, index, array) { return prev + cur }, 0);
+
+        //#5 Map
+        var map = data.mapFn(function (cur, index, array) { return cur + 1 });
+
+        //#6 Filter
+        var filter = data.filterFn(function (cur, index, array) { return cur < 4 });
+
+        //#7 Average
+        var average = avgFn(data);
+
+        //#9 First
+        var first = data.firstFn(function (cur, index, array) { return cur > 4 });
+    </script>
+</head>
+<body>
+</body>
+</html>
