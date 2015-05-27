@@ -14,37 +14,30 @@
     <script type="text/javascript" src="js/9_First.js"></script>
     <script type="text/javascript" src="js/10_Lazy.js"></script>
     <script type="text/javascript" src="js/11_Memorization.js"></script>
-    <script type="text/javascript">
-        var data = [1, 2, undefined, 4, 5];
-        var test = function (id, result) {
-            var divs = document.getElementsByClassName('taskresult');
-            divs[id - 1].style.backgroundColor = result ? "lightgreen" : "#ff3c00";
-            divs[id - 1].innerHTML = result ? "Pass" : "Error";
-        }
-    </script>
+    <script type="text/javascript" src="js/utils.js"></script>
 </head>
 <body>
     <div class="taskblock">
         <span>
             1. Partial Application <br />
-            G(x,y,z...) - function(){ return a / b; } <br />
-            F(x, G(x,y,z...)) - partialFn(1, G(x,y,z...)); <br />
+            Initial function f(x) =  a / b <br />
+            Produce partial function hupebola f(x) = 1/x <br />
         </span>
         <div class="taskresult">Not processed...</div>
     </div>
     <div class="taskblock">
         <span>
             2. Currying <br />
-            F(x,y,z) - function (a, b, c) { return a + b + c; } <br />
-            curry(f) = x->(y->(z->N))<br />
+            Initial function f(x) = a + b + c <br />
+            Produce curry function curryFn();<br />
         </span>
         <div class="taskresult">Not processed...</div>
     </div>
     <div class="taskblock">
         <span>
             3. Linear Fold <br />
-            Initial array - [1, 2, 3, 4, 5]<br />
-            Result sum - 15<br />
+            <span class="data"></span><br />
+            Produce sum of array elements.
         </span>
         <div class="taskresult">Not processed...</div>
     </div>
@@ -58,24 +51,24 @@
     <div class="taskblock">
         <span>
             5. Map <br />
-            Initial array [0, 1, 2, 3, 4, 5] <br />
-            Mapped array [1, 2, 3, 4, 5, 6] <br />
+            <span class="data"></span><br />
+            Produce new array from element of old array using f(x) = x + 1
         </span>
         <div class="taskresult">Not processed...</div>
     </div>
     <div class="taskblock">
         <span>
             6. Filter <br />
-            Initial array [0, 1, 2, 3, 4, 5] <br />
-            Filtered array [1, 2, 3] <br />
+            <span class="data"></span><br />
+            Produce new array using condition f(x) = x > 4<br />
         </span>
         <div class="taskresult">Not processed...</div>
     </div>
     <div class="taskblock">
         <span>
             7. Average <br />
-            Initial array [0, 1, 2, 3, 4, 5]<br />
-            Average result 3<br />
+            <span class="data"></span><br />
+            Produce average result<br />
         </span>
         <div class="taskresult">Not processed...</div>
     </div>
@@ -84,15 +77,15 @@
         <span>
             8. Sum of Random numbers <br />
             Use linearUnfoldFn to generate array of 10 random numbers<br />
-            Use linearFoldFn to find out sum<br />
+            Use linearFoldFn to find out sumof this numbers<br />
         </span>
         <div class="taskresult">Not processed...</div>
     </div>
     <div class="taskblock">
         <span>
             9. Find first element <br />
-            Initial array [0, 1, 2, 3, 4, 5]<br />
-            Search function f(x) = x > 4 <br />
+            <span class="data"></span><br />
+            Search element using condition f(x) = x > 4 <br />
         </span>
         <div class="taskresult">Not processed...</div>
     </div>
@@ -109,67 +102,71 @@
         <div class="taskresult">Not processed...</div>
     </div>
     <script type="text/javascript">
-        //#1 Partial Application
-        var divideFn = function (a, b) { return a / b; }        //G(x,y,z...)
-        var hyperbolaFn = partialFn(1, divideFn);               //F(x, G(x,y,z...))
-        test(1, (hyperbolaFn(5) == 0.2));
+        (function () {
+            "strict mode"
+            setDataText();
+            //--------------------#1 Partial Application---------------------------
+            var divideFn = function (a, b) { return a / b; }        //G(x,y,z...)
+            var hyperbolaFn = partialFn(1, divideFn);               //F(x, G(x,y,z...))
+            setTestResult(1, (hyperbolaFn(5) == 0.2));
 
-        //#2 Curry
-        var sumFn = function (a, b, c) { return a + b + c; };    //F(x,y,z)
-        var currySumFn = curryFn(sumFn);                         //curry(f) = x->(y->(z->N))
-        var result1 = currySumFn(1);                             //return function
-        var result2 = currySumFn(1)(2);                          //return function
-        var result3 = currySumFn(1)(2)(3);                       //return sum
-        test(2, typeof result1 === 'function' && typeof result2 === 'function' && result3 === 6);
+            //--------------------#2 Curry---------------------------
+            var sumFn = function (a, b, c) { return a + b + c; };    //F(x,y,z)
+            var currySumFn = curryFn(sumFn);                         //curry(f) = x->(y->(z->N))
+            var result1 = currySumFn(1);                             //return function
+            var result2 = currySumFn(1)(2);                          //return function
+            var result3 = currySumFn(1)(2)(3);                       //return sum
+            setTestResult(2, typeof result1 === 'function' && typeof result2 === 'function' && result3 === 6);
 
-        //#3 Linear Fold
-        var result = data.linearFoldFn(function (prev, cur, index, array) { return prev + cur }, 0);
-        test(3, String(result) === String(data.reduce(function (prev, cur, index, array) { return prev + cur }, 0)));
+            //--------------------#3 Linear Fold---------------------------
+            var result = data.linearFoldFn(function (prev, cur, index, array) { return prev + cur }, 0);
+            setTestResult(3, String(result) === String(data.reduce(function (prev, cur, index, array) { return prev + cur }, 0)));
 
-        //#4 Linear unfold
-        var fibArray = [0, 1, 1, 2, 3, 5, 8, 13, 21];
-        var result = linearUnfoldFn(function (state) {
-            var value = state.val1 + state.val2;
-            return state.count > 0 ? new tuple({ val1: state.val2, val2: value, count: state.count - 1 }, value) : false;
-        }, { val1: -1, val2: 1, count: 9 });
-        test(4, result.every(function (cur, index) { return cur === fibArray[index] }));
+            //--------------------#4 Linear unfold---------------------------
+            var fibArray = [0, 1, 1, 2, 3, 5, 8, 13, 21];
+            var result = linearUnfoldFn(function (state) {
+                var value = state.val1 + state.val2;
+                return state.count > 0 ? new tuple({ val1: state.val2, val2: value, count: state.count - 1 }, value) : false;
+            }, { val1: -1, val2: 1, count: 9 });
+            setTestResult(4, result.every(function (cur, index) { return cur === fibArray[index] }));
 
-        //#5 Map
-        var result = data.mapFn(function (cur, index, array) { return cur + 1 });
-        var result1 = data.map(function (cur, index, array) { return cur + 1 });
-        test(5, result.every(function (cur, index) { return String(cur) == String(result1[index]) }));
+            //--------------------#5 Map---------------------------
+            var result = data.mapFn(function (cur, index, array) { return cur + 1 });
+            var result1 = data.map(function (cur, index, array) { return cur + 1 });
+            setTestResult(5, result.every(function (cur, index) { return String(cur) == String(result1[index]) }));
 
-        //#6 Filter
-        var result = data.filterFn(function (cur, index, array) { return cur < 4 });
-        var result1 = data.filter(function (cur, index, array) { return cur < 4 });
-        test(6, result.every(function (cur, index) { return String(cur) == String(result1[index]) }));
+            //--------------------#6 Filter---------------------------
+            var result = data.filterFn(function (cur, index, array) { return cur < 4 });
+            var result1 = data.filter(function (cur, index, array) { return cur < 4 });
+            setTestResult(6, result.every(function (cur, index) { return String(cur) == String(result1[index]) }));
 
-        //#7 Average
-        var result = averageFn(data);
-        test(7, String(result) === String(data.reduce(function (prev, cur) { return prev + cur }, 0) / data.length));
+            //--------------------#7 Average---------------------------
+            var result = averageFn(data);
+            setTestResult(7, String(result) === String(data.reduce(function (prev, cur) { return prev + cur }, 0) / data.length));
 
-        //#8 Sum of random numbers
-        var randArray = linearUnfoldFn(function (state) { return state > 0 ? new tuple(state - 1, Math.random()) : false; }, 10);
-        var result = randArray.linearFoldFn(function (prev, cur, index, array) { return prev + cur }, 0);
-        test(8, randArray.every(function (cur) { return cur < 1 }) && randArray.length == 10);
+            //--------------------#8 Sum of random numbers---------------------------
+            var randArray = linearUnfoldFn(function (state) { return state > 0 ? new tuple(state - 1, Math.random()) : false; }, 10);
+            var result = randArray.linearFoldFn(function (prev, cur, index, array) { return prev + cur }, 0);
+            setTestResult(8, randArray.every(function (cur) { return cur < 1 }) && randArray.length == 10);
 
-        //#9 First
-        var result = data.firstFn(function (cur, index, array) { return cur > 4 });
-        test(9, result === 5);
+            //--------------------#9 First---------------------------
+            var result = data.firstFn(function (cur, index, array) { return cur > 4 });
+            setTestResult(9, result === 5);
 
-        //#10 Lazy
-        var sumFn = function (a, b, c) { return a + b + c };
-        var sumFnLazy = lazyFn(sumFn);
-        var result1 = sumFnLazy(1, 2, 3);
-        var result2 = sumFnLazy(1, 2, 3);
-        test(10, result1 === result2);
+            //--------------------#10 Lazy---------------------------
+            var sumFn = function (a, b, c) { return a + b + c };
+            var sumFnLazy = lazyFn(sumFn);
+            var result1 = sumFnLazy(1, 2, 3);
+            var result2 = sumFnLazy(1, 2, 3);
+            setTestResult(10, result1 === result2);
 
-        //#11 Memorization
-        var sumFn = function (a, b, c) { return a + b + c };
-        var sumFnMemo = memorizationFn(sumFn);
-        var result1 = sumFnMemo(1, 2, 3);
-        var result2 = sumFnMemo(1, 2, 3);
-        test(11, result1 === result2);
+            //--------------------#11 Memorization---------------------------
+            var sumFn = function (a, b, c) { return a + b + c };
+            var sumFnMemo = memorizationFn(sumFn);
+            var result1 = sumFnMemo(1, 2, 3);
+            var result2 = sumFnMemo(1, 2, 3);
+            setTestResult(11, result1 === result2);
+        })();
     </script>
 </body>
 </html>
