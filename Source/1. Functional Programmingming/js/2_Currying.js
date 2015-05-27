@@ -24,4 +24,7 @@
     }
 })();
 
-//How is it differ from Partial Application? - Currying is converting a function of n arguments into n functions with a single argument each. 
+//How is it differ from Partial Application? 
+
+//Currying is converting a function of n arguments into n functions with a single argument each.
+//Particial application in other side produce new function with less parameters count.
