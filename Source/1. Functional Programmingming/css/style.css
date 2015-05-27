@@ -1,7 +1,16 @@
 ﻿.taskblock {
-    padding:10px;
+    margin-bottom: 5px;
+    width: 500px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    overflow:hidden;
+}
+
+.tasktext {
+    padding: 10px 10px 0px 10px;
 }
 
 .taskresult {
-    background-color:gray;
+    background-color: gray;
+    padding: 1px 0px 1px 10px;
 }
