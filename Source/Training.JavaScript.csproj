@@ -69,8 +69,8 @@
     <Content Include="1. Functional Programmingming\js\7_Average.js" />
     <Content Include="1. Functional Programmingming\js\8_Sum.js" />
     <Content Include="1. Functional Programmingming\js\9_First.js" />
-    <Content Include="1. Functional Programmingming\script.js" />
     <Content Include="1. Functional Programmingming\css\style.css" />
+    <Content Include="1. Functional Programmingming\js\utils.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
