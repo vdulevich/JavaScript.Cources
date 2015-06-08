@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script data-main="./js/logger/app" src="js/require.js"></script>
+</head>
+<body>
+    <script>
+        requirejs(['app'], function (app) {
+            app.log('bla bla bla');
+            app.log('bla bla bla', 'Window');
+        });
+    </script>
+</body>
+</html>

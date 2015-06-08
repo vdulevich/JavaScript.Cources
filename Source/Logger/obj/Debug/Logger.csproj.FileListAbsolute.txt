@@ -1,0 +1,6 @@
+D:\Projects\Training.JavaScript\Source\Logger\bin\Logger.dll.config
+D:\Projects\Training.JavaScript\Source\Logger\bin\Logger.dll
+D:\Projects\Training.JavaScript\Source\Logger\bin\Logger.pdb
+D:\Projects\Training.JavaScript\Source\Logger\obj\Debug\Logger.dll
+D:\Projects\Training.JavaScript\Source\Logger\obj\Debug\Logger.pdb
+D:\Projects\Training.JavaScript\Source\Logger\obj\Debug\Logger.csprojResolveAssemblyReference.cache

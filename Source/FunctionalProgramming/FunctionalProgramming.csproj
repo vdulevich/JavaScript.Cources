@@ -57,20 +57,20 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1. Functional Programmingming\index.html" />
-    <Content Include="1. Functional Programmingming\js\10_Lazy.js" />
-    <Content Include="1. Functional Programmingming\js\11_Memorization.js" />
-    <Content Include="1. Functional Programmingming\js\1_PartialApplication.js" />
-    <Content Include="1. Functional Programmingming\js\2_Currying.js" />
-    <Content Include="1. Functional Programmingming\js\3_LinearFold.js" />
-    <Content Include="1. Functional Programmingming\js\4_LinearUnfold.js" />
-    <Content Include="1. Functional Programmingming\js\5_Map.js" />
-    <Content Include="1. Functional Programmingming\js\6_Filter.js" />
-    <Content Include="1. Functional Programmingming\js\7_Average.js" />
-    <Content Include="1. Functional Programmingming\js\8_Sum.js" />
-    <Content Include="1. Functional Programmingming\js\9_First.js" />
-    <Content Include="1. Functional Programmingming\css\style.css" />
-    <Content Include="1. Functional Programmingming\js\utils.js" />
+    <Content Include="index.html" />
+    <Content Include="js\10_Lazy.js" />
+    <Content Include="js\11_Memorization.js" />
+    <Content Include="js\1_PartialApplication.js" />
+    <Content Include="js\2_Currying.js" />
+    <Content Include="js\3_LinearFold.js" />
+    <Content Include="js\4_LinearUnfold.js" />
+    <Content Include="js\5_Map.js" />
+    <Content Include="js\6_Filter.js" />
+    <Content Include="js\7_Average.js" />
+    <Content Include="js\8_Sum.js" />
+    <Content Include="js\9_First.js" />
+    <Content Include="css\style.css" />
+    <Content Include="js\utils.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
