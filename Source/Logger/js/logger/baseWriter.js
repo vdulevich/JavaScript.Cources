@@ -11,11 +11,18 @@
         throw new Error("Method not implemented");
     }
 
-    baseWriter.prototype.log = function (data) {
+    baseWriter.prototype.writeLog = function (data) {
         throw new Error("Method not implemented");
     }
 
-    baseWriter.prototype.format = function (data) {
+    baseWriter.prototype.log = function () {
+        var result = Array.prototype.reduce.call(arguments, function (prev, cur) {
+            return prev + JSON.stringify(cur) + ' ';
+        }, '');
+        this.writeLog(this.lineFormat(result));
+    }
+
+    baseWriter.prototype.lineFormat = function (data) {
         var now = new Date();
         return ">>> {0}:{1}:{2} - {3}".format(now.getHours(), now.getMinutes(), now.getSeconds(), data);
     }

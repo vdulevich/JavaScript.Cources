@@ -15,7 +15,7 @@
             return logDiv;
         }
 
-        this.log = function (data) {
+        this.writeLog = function (data) {
             if (getOrCreateLogDiv()) {
                 var logItemDiv = document.createElement('div');
                 logItemDiv.innerHTML = this.format(data);

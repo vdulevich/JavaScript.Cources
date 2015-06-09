@@ -4,14 +4,18 @@
     function alertWriter() {
         alertWriter.superclass.constructor.call(this);
 
-        this.log = function (data) {
-            alert(this.format(data));
+        this.writeLog = function (data) {
+            alert(data);
         }
 
         var name = 'Alert';
 
         this.name = function () {
             return name;
+        }
+
+        this.format = function (data) {
+            return data;
         }
     }
 

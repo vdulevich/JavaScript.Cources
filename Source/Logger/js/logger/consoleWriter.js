@@ -3,7 +3,7 @@
 
     function consoleWriter() {
         consoleWriter.superclass.constructor.call(this);
-        this.log = function (data) {
+        this.writeLog = function (data) {
             console.log(data.toString());
         }
 
