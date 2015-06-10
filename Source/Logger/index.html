@@ -6,70 +6,62 @@
     <script data-main="./js/app.js" src="js/require.js"></script>
 </head>
 <body>
-    <script>
-        require(['./js/app.js'], function (app) {
-            logger.setWriter('Window');
-            loggerExt.monitorEventAll(btnTest);
-            logger.log('Test', 'Console');
-            //logger.monitorEventAll(btnTest, true); //remove all listeners
-        });
-    </script>
     <center>
         <div style="width:80%;">
             <div class="taskblock">
                 <div class="tasktext">1. As a developer I want to have an ability to log information</div>
                 <div class="taskresult">
-                    1.1 Functionality provided by function logger.log(data [, outputType]) in logger.js <br />
+                    Functionality provided by function logger.log(data [, outputType]) in logger.js <br />
                     <input type="button" value="Log" onclick="logger.log('Test alert log', 'Alert');" />
                 </div>
             </div>
             <div class="taskblock">
                 <div class="tasktext">2. As a developer I want to have an ability to send log information to the console</div>
                 <div class="taskresult">
-                    2.1 Functionality implemented in consoleWriter.js class <br />
+                    Functionality implemented in consoleWriter.js class <br />
                     <input type="button" value="Log to console" onclick="logger.log('Test console log', 'Console');" />
                 </div>
             </div>
             <div class="taskblock">
                 <div class="tasktext">3. As a developer I want to have an ability to send log information to an alert window.</div>
                 <div class="taskresult">
-                    3.1 Functionality implemented in alertWriter.js class <br />
+                    Functionality implemented in alertWriter.js class <br />
                     <input type="button" value="Log to alert" onclick="logger.log('Test alert log', 'Alert');" />
                 </div>
             </div>
             <div class="taskblock">
                 <div class="tasktext">4. As a developer I want to have an ability to send log information to the current window</div>
                 <div class="taskresult">
-                    4.1 Functionality implemented in windowWriter.js class <br />
+                    Functionality implemented in windowWriter.js class <br />
                     <input type="button" value="Log to window" onclick="logger.log('Test window log', 'Window');" />
                 </div>
             </div>
             <div class="taskblock">
                 <div class="tasktext">5. As a developer I want to have an ability to send log information to abstract Web API endpoint.</div>
-                <div class="taskresult" style="background-color:#ff3c00"> 5.1 Not implemented :(</div>
+                <div class="taskresult" style="background-color:orange"> 5.1 Not implemented :(</div>
             </div>
             <div class="taskblock">
                 <div class="tasktext">6. As a developer I want to have an ability to select from built-in logging methods.</div>
                 <div class="taskresult">
-                    6.1 Functionality provided by logger.log(data [, outputType]).<br />
+                    Functionality provided by logger.log(data [, outputType]).<br />
                     Parameter 'outputType' to output data with specific writer. If outputType parameter is ommited, defaut outputType will be used.
                 </div>
                 <div class="taskresult">
-                    6.2 Functionality provided by logger.setWriter(name).<br />
+                    Functionality provided by logger.setWriter(name).<br />
                     Parameter 'name' to use specific writer. If name parameter is ommited or has incorrect value writer will not be setted.
                 </div>
             </div>
             <div class="taskblock">
                 <div class="tasktext">7. As a developer I want to be able to extend the library with custom logging methods.</div>
                 <div class="taskresult">
-                    7.1 Functionality provided by loggerExt.registerWriter(writer).<br />
+                    Functionality provided by loggerExt.registerWriter(writer).<br />
                     Parameter 'writer' must implement baseWriter class.<br />
                 </div>
             </div>
             <div class="taskblock">
                 <div class="tasktext">8. As a developer I want to library to automatically log all unhandled client-side exceptions</div>
                 <div class="taskresult">
-                    7.1 Functionality provided by loggerExt.monitorExceptions().<br />
+                    Functionality provided by loggerExt.monitorExceptions().<br />
                     <input type="button" id="btnTest" value="Log unhandled exception" onclick="logger.setWriter('Alert'); logger.monitorExceptions(); throw new Error('Test unhandled exception')" />
                 </div>
             </div>
@@ -79,7 +71,7 @@
                     methods so that the library can monitor not only exceptions but other events too
                 </div>
                 <div class="taskresult">
-                    7.1 Functionality provided by extendet library loggerExt.monitorEventAll(domElement[, unsubscribe]).<br />
+                    Functionality provided by extendet library loggerExt.monitorEventAll(domElement[, unsubscribe]).<br />
                     Parameter 'domElement' dom element to monitor.<br />
                     Parameter 'unsubscribe' unsubscribe from logging.<br />
                     <input type="button" id="btnTest" value="Start monitor document" onclick="loggerExt.setWriter('Window'); loggerExt.monitorEventAll(document);" />
@@ -93,7 +85,7 @@
                     can easily know how to extend the library.
                 </div>
                 <div class="taskresult">
-                    10.1 Not sure that it's exactly what is needed but there are a contracts in my library like checks for input params types, params undefined and etc.
+                    Not sure that it's exactly what is needed but there are a contracts in my library like checks for input params types, params undefined and etc.
                 </div>
             </div>
             <div class="taskblock">
@@ -102,7 +94,7 @@
                     violate the contract of logging or instrumentation methods.
                 </div>
                 <div class="taskresult">
-                    11.1 For example abstract class 'baseWriter' check if its instance creating and throw error - throw new Error("Can't create abstract class"). <br />
+                    For example abstract class 'baseWriter' check if its instance creating and throw error - throw new Error("Can't create abstract class"). <br />
                 </div>
             </div>
             <div class="taskblock">
@@ -111,7 +103,7 @@
                     module or CommonJS module.
                 </div>
                 <div class="taskresult">
-                    11.1 AMD architecture implemented. In app.js loggers assigned to global variables<br />
+                    AMD architecture implemented. In app.js loggers assigned to global variables<br />
                 </div>
             </div>
         </div>
