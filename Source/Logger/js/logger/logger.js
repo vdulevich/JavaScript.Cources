@@ -1,39 +1,43 @@
-﻿define(['./js/logger/alertWriter.js', './js/logger/consoleWriter.js', './js/logger/windowWriter.js', './js/logger/utils.js'],
+﻿define(['./alertWriter.js', './consoleWriter.js', './windowWriter.js', './utils.js'],
     function (alertWriter, consoleWriter, windowWriter, utils) {
         'use strict';
 
-        var logName = 'Console';
+        function logger() {
+            this.logName = 'Console';
+        }
+
         var loggers = {};
+
         var eventHandlers = {};
 
-        function registerWriter(writer) {
+        var registerWriter = function (writer) {
             loggers[writer.name()] = writer;
         }
 
-        function setLogType(name) {
+        logger.prototype.registerWriter = registerWriter;
+
+        logger.prototype.setWriter = function(name) {
             if (loggers[name]) {
-                logName = name;
+                this.logName = name;
             }
         }
 
-        function log(data, name) {
-            (loggers[name] || loggers[logName]).log(data);
+        logger.prototype.log = function (data, name) {
+            (loggers[name] || loggers[this.logName]).log(data);
         }
 
         var oldErrorHandler = window ? window.onerror : undefined;
         var newErrorHandler = function (errorMsg, url, lineNumber) {
-            log(errorMsg);
+            this.log(errorMsg);
             if (oldErrorHandler) {
                 return oldErrorHandler(errorMsg, url, lineNumber);
             }
             return false;
         }
 
-        function monitorExceptions(unsubscribe) {
+        logger.prototype.monitorExceptions = function (unsubscribe) {
             if (!unsubscribe) {
-                if (window && window.onerror !== newErrorHandler) {
-                    window.onerror = newErrorHandler;
-                }
+                window.onerror = newErrorHandler.bind(this);
             } else {
                 window.onerror = oldErrorHandler;
             }
@@ -43,10 +47,10 @@
             if (callback) {
                 callback.apply(this, arguments);
             }
-            log('Event {0} called on \'{1}\''.format(event.type, this.id));
+            this.log('Event {0} called on \'{1}\''.format(event.type));
         }
 
-        function monitorEvent(domElement, eventName, unsubscribe, callback) {
+        logger.prototype.monitorEvent = function(domElement, eventName, unsubscribe, callback) {
             if (domElement) {
                 var handlers = eventHandlers[domElement.uniqueId()],
                     handler = handlers ? handlers[eventName] : undefined;
@@ -55,7 +59,7 @@
                 }
                 if (!unsubscribe) {
                     if (!handler) {
-                        handler = eventHandler.bind(domElement, callback);
+                        handler = eventHandler.bind(this, callback);
                         handlers[eventName] = handler;
                         domElement.addEventListener(eventName, handler);
                     }
@@ -66,17 +70,17 @@
             }
         }
 
-        function monitorEventAll(domElement, unsubscribe, callback) {
+        logger.prototype.monitorEventAll = function (domElement, unsubscribe, callback) {
             if (domElement) {
                 for (var key in domElement) {
                     if (key.slice(0, 2) == 'on') {
-                        monitorEvent(domElement, key.slice(2), unsubscribe, callback);
+                        this.monitorEvent(domElement, key.slice(2), unsubscribe, callback);
                     }
                 }
             }
         }
 
-        function monitorFunction(initialFn) {
+        logger.prototype.monitorFunction = function(initialFn) {
             return function () {
                 log('Function {0} called with arguments: ({1})'.format(initialFn.getName(), covertArgsToString(arguments)));
                 var result = initialFn.apply(this, arguments);
@@ -85,18 +89,11 @@
             }
         }
 
+        logger.prototype.initialize = function () {
+            registerWriter(new alertWriter());
+            registerWriter(new consoleWriter());
+            registerWriter(new windowWriter());
+        };
 
-        registerWriter(new alertWriter());
-        registerWriter(new consoleWriter());
-        registerWriter(new windowWriter());
-
-        return {
-            log: log,
-            setLogType: setLogType,
-            registerWriter: registerWriter,
-            monitorFunction: monitorFunction,
-            monitorExceptions: monitorExceptions,
-            monitorEvent: monitorEvent,
-            monitorEventAll: monitorEventAll
-        }
+        return logger;
     });

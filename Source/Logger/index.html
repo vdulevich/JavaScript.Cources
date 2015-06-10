@@ -2,18 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <script type="text/javascript" src="js/utils.js"></script>
-    <script data-main="./js/logger/logger.js" src="js/require.js"></script>
+    <script data-main="./js/app.js" src="js/require.js"></script>
 </head>
 <body>
     <script>
-        requirejs(['logger'], function (logger)
-        {
-            logger.setLogType('Window');
+        require(['./js/app.js'], function (app) {
+            logger.setWriter('Window');
             logger.monitorEventAll(btnTest);
+            logger.log('Test', 'Console');
+            logger.log('Test', 'Alert');
+            logger.monitorExceptions();
+            throw new Error('Test');
             //logger.monitorEventAll(btnTest, true); //remove all listeners
         });
     </script>
-    <input type="button" value="Press me" id="btnTest"/>
+    <input type="button" value="Press me" id="btnTest" onclick=""/>
 </body>
 </html>
