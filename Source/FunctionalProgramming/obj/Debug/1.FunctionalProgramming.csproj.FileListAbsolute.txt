@@ -1,0 +1,5 @@
+D:\Projects\Training.JavaScript\Source\Functional Programming\bin\Training.JavaScript.dll.config
+D:\Projects\Training.JavaScript\Source\Functional Programming\bin\Training.JavaScript.dll
+D:\Projects\Training.JavaScript\Source\Functional Programming\bin\Training.JavaScript.pdb
+D:\Projects\Training.JavaScript\Source\Functional Programming\obj\Debug\Training.JavaScript.dll
+D:\Projects\Training.JavaScript\Source\Functional Programming\obj\Debug\Training.JavaScript.pdb

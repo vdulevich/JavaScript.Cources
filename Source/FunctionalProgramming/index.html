@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>1. Functional Programming</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/1_PartialApplication.js"></script>
+    <script type="text/javascript" src="js/2_Currying.js"></script>
+    <script type="text/javascript" src="js/3_LinearFold.js"></script>
+    <script type="text/javascript" src="js/4_LinearUnfold.js"></script>
+    <script type="text/javascript" src="js/5_Map.js"></script>
+    <script type="text/javascript" src="js/6_Filter.js"></script>
+    <script type="text/javascript" src="js/7_Average.js"></script>
+    <script type="text/javascript" src="js/8_Sum.js"></script>
+    <script type="text/javascript" src="js/9_First.js"></script>
+    <script type="text/javascript" src="js/10_Lazy.js"></script>
+    <script type="text/javascript" src="js/11_Memorization.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+</head>
+<body>
+    <div class="taskblock">
+        <div class="tasktext">
+            1. Partial Application <br />
+            Initial function f(x) =  a / b <br />
+            Produce partial function hupebola f(x) = 1/x <br />
+        </div>
+        <div class="taskresult">Not processed...</div>
+    </div>
+    <div class="taskblock">
+        <div class="tasktext">
+            2. Currying <br />
+            Initial function f(x) = a + b + c <br />
+            Produce curry function curryFn();<br />
+        </div>
+        <div class="taskresult">Not processed...</div>
+    </div>
+    <div class="taskblock">
+        <div class="tasktext">
+            3. Linear Fold <br />
+            <span class="data"></span><br />
+            Produce sum of array elements.
+        </div>
+        <div class="taskresult">Not processed...</div>
+    </div>
+    <div class="taskblock">
+        <div class="tasktext">
+            4. Linear Unfold <br />
+            Produce [0, 1, 1, 2, 3, 5, 8, 13, 21] fibonachi array<br />
+        </div>
+        <div class="taskresult">Not processed...</div>
+    </div>
+    <div class="taskblock">
+        <div class="tasktext">
+            5. Map <br />
+            <span class="data"></span><br />
+            Produce new array from element of old array using f(x) = x + 1
+        </div>
+        <div class="taskresult">Not processed...</div>
+    </div>
+    <div class="taskblock">
+        <div class="tasktext">
+            6. Filter <br />
+            <span class="data"></span><br />
+            Produce new array using condition f(x) = x > 4<br />
+        </div>
+        <div class="taskresult">Not processed...</div>
+    </div>
+    <div class="taskblock">
+        <div class="tasktext">
+            7. Average <br />
+            <span class="data"></span><br />
+            Produce average result of array elements<br />
+        </div>
+        <div class="taskresult">Not processed...</div>
+    </div>
+
+    <div class="taskblock">
+        <div class="tasktext">
+            8. Sum of Random numbers <br />
+            Use linearUnfoldFn to generate array of 10 random numbers<br />
+            Use linearFoldFn to find out sum of this numbers<br />
+        </div>
+        <div class="taskresult">Not processed...</div>
+    </div>
+    <div class="taskblock">
+        <div class="tasktext">
+            9. Find first element <br />
+            <span class="data"></span><br />
+            Search element using condition f(x) = x > 4 <br />
+        </div>
+        <div class="taskresult">Not processed...</div>
+    </div>
+    <div class="taskblock">
+        <div class="tasktext">
+            10. Lazy <br />
+        </div>
+        <div class="taskresult">Not processed...</div>
+    </div>
+    <div class="taskblock">
+        <div class="tasktext">
+            11. Memorization<br />
+        </div>
+        <div class="taskresult">Not processed...</div>
+    </div>
+    <script type="text/javascript">
+        (function () {
+            "strict mode"
+            setDataText();
+            //--------------------#1 Partial Application---------------------------
+            var divideFn = function (a, b) { return a / b; }        //G(x,y,z...)
+            var hyperbolaFn = partialFn(1, divideFn);               //F(x, G(x,y,z...))
+            setTestResult(1, (hyperbolaFn(5) == 0.2));
+
+            //--------------------#2 Curry---------------------------
+            var sumFn = function (a, b, c) { return a + b + c; };    //F(x,y,z)
+            var currySumFn = curryFn(sumFn);                         //curry(f) = x->(y->(z->N))
+            var result1 = currySumFn(1);                             //return function
+            var result2 = currySumFn(1)(2);                          //return function
+            var result3 = currySumFn(1)(2)(3);                       //return sum
+            setTestResult(2, typeof result1 === 'function' && typeof result2 === 'function' && result3 === 6);
+
+            //--------------------#3 Linear Fold---------------------------
+            var result = data.linearFoldFn(function (prev, cur, index, array) { return prev + cur }, 0);
+            setTestResult(3, String(result) === String(data.reduce(function (prev, cur, index, array) { return prev + cur }, 0)));
+
+            //--------------------#4 Linear unfold---------------------------
+            var fibArray = [0, 1, 1, 2, 3, 5, 8, 13, 21];
+            var result = linearUnfoldFn(function (state) {
+                var value = state.val1 + state.val2;
+                return state.count > 0 ? new tuple({ val1: state.val2, val2: value, count: state.count - 1 }, value) : false;
+            }, { val1: -1, val2: 1, count: 9 });
+            setTestResult(4, result.every(function (cur, index) { return cur === fibArray[index] }));
+
+            //--------------------#5 Map---------------------------
+            var result = data.mapFn(function (cur, index, array) { return cur + 1 });
+            var result1 = data.map(function (cur, index, array) { return cur + 1 });
+            setTestResult(5, result.every(function (cur, index) { return String(cur) == String(result1[index]) }));
+
+            //--------------------#6 Filter---------------------------
+            var result = data.filterFn(function (cur, index, array) { return cur < 4 });
+            var result1 = data.filter(function (cur, index, array) { return cur < 4 });
+            setTestResult(6, result.every(function (cur, index) { return String(cur) == String(result1[index]) }));
+
+            //--------------------#7 Average---------------------------
+            var result = averageFn(data);
+            setTestResult(7, String(result) === String(data.reduce(function (prev, cur) { return prev + cur }, 0) / data.length));
+
+            //--------------------#8 Sum of random numbers---------------------------
+            var randArray = linearUnfoldFn(function (state) { return state > 0 ? new tuple(state - 1, Math.random()) : false; }, 10);
+            var result = randArray.linearFoldFn(function (prev, cur, index, array) { return prev + cur }, 0);
+            setTestResult(8, randArray.every(function (cur) { return cur < 1 }) && randArray.length == 10);
+
+            //--------------------#9 First---------------------------
+            var result = data.firstFn(function (cur, index, array) { return cur > 4 });
+            setTestResult(9, result === 5);
+
+            //--------------------#10 Lazy---------------------------
+            var sumFn = function (a, b, c) { return a + b + c };
+            var sumFnLazy = lazyFn(sumFn);
+            var result1 = sumFnLazy(1, 2, 3);
+            var result2 = sumFnLazy(1, 2, 3);
+            setTestResult(10, result1 === result2);
+
+            //--------------------#11 Memorization---------------------------
+            var sumFn = function (a, b, c) { return a + b + c };
+            var sumFnMemo = memorizationFn(sumFn);
+            var result1 = sumFnMemo(1, 2, 3);
+            var result2 = sumFnMemo(1, 2, 3);
+            setTestResult(11, result1 === result2);
+        })();
+    </script>
+</body>
+</html>

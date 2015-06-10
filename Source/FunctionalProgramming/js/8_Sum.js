@@ -1,0 +1,2 @@
+﻿//#8 Sum of random numbers//var ranArray = linearUnfoldFn(function (state) { return state > 0 ? new tuple(state - 1, Math.random()) : false; }, 10);
+//var result = ranArray.linearFoldFn(function (prev, cur, index, array) { return prev + cur }, 0);
