@@ -7,7 +7,7 @@
 
     utils.extend(alertWriter, baseWriter);
 
-    alertWriter.prototype.format = function (data) {
+    alertWriter.prototype.lineFormat = function (data) {
         return data;
     }
 

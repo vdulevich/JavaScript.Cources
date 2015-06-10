@@ -12,7 +12,7 @@
     var getOrCreateLogDiv = function () {
         if (!logDiv && window) {
             logDiv = document.createElement('div');
-            logDiv.style.cssText = 'position:absolute;width:100%;height:200px; overflow:auto; opacity:0.3;z-index:100;background:lightgray;bottom: 0px;left: 0px;';
+            logDiv.style.cssText = 'width:100%;height:200px; overflow:auto; opacity:0.4;z-index:100;background:lightgray;bottom: 0px;left: 0px;';
             window.document.body.appendChild(logDiv);
         }
         return logDiv;

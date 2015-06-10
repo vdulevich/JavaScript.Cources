@@ -1,0 +1,15 @@
+﻿.taskblock {
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.tasktext {
+    padding: 10px 10px 0px 10px;
+    text-align: left;
+}
+
+.taskresult {
+    text-align: left;
+    background-color: lightgray;
+    padding: 1px 0px 1px 10px;
+}
