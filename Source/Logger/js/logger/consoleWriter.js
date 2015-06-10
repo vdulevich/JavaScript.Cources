@@ -1,20 +1,15 @@
-﻿define(['./baseWriter.js'], function (baseWriter) {
+﻿define(['./baseWriter.js', './utils.js'], function (baseWriter, utils) {
     'use strict';
 
     function consoleWriter() {
-        consoleWriter.superclass.constructor.call(this);
-        this.writeLog = function (data) {
-            console.log(data.toString());
-        }
-
-        var name = 'Console';
-
-        this.name = function () {
-            return name;
-        }
+        consoleWriter.superclass.constructor.call(this, 'Console');
     }
 
-    extend(consoleWriter, baseWriter);
+    utils.extend(consoleWriter, baseWriter);
+
+    consoleWriter.prototype.writeLog = function (data) {
+        console.log(data);
+    }
 
     return consoleWriter;
 });

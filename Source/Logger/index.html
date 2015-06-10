@@ -7,11 +7,13 @@
 </head>
 <body>
     <script>
-        requirejs(['logger'], function (logger) {
+        requirejs(['logger'], function (logger)
+        {
+            logger.setLogType('Window');
             logger.monitorEventAll(btnTest);
-            logger.monitorEventAll(btnTest, true);
+            //logger.monitorEventAll(btnTest, true); //remove all listeners
         });
     </script>
-    <input type="button" value="test" id="btnTest"/>
+    <input type="button" value="Press me" id="btnTest"/>
 </body>
 </html>

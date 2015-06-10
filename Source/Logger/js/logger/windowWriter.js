@@ -1,36 +1,29 @@
-﻿define(['./baseWriter.js'], function (baseWriter) {
+﻿define(['./baseWriter.js', './utils.js'], function (baseWriter, utils) {
     'use strict';
 
     function windowWriter() {
-        windowWriter.superclass.constructor.call(this);
-
-        var logDiv;
-
-        var getOrCreateLogDiv = function () {
-            if (!logDiv && window) {
-                logDiv = document.createElement('div');
-                logDiv.style.cssText = 'position:absolute;width:100%;height:120px;opacity:0.3;z-index:100;background:lightgray;bottom: 0px;left: 0px;';
-                window.document.body.appendChild(logDiv);
-            }
-            return logDiv;
-        }
-
-        this.writeLog = function (data) {
-            if (getOrCreateLogDiv()) {
-                var logItemDiv = document.createElement('div');
-                logItemDiv.innerHTML = this.format(data);
-                logDiv.appendChild(logItemDiv);
-            }
-        }
-
-        var name = 'Window';
-
-        this.name = function () {
-            return name;
-        }
+        windowWriter.superclass.constructor.call(this, 'Window');
     };
 
-    extend(windowWriter, baseWriter);
+    utils.extend(windowWriter, baseWriter);
+
+    var logDiv;
+
+    var getOrCreateLogDiv = function () {
+        if (!logDiv && window) {
+            logDiv = document.createElement('div');
+            logDiv.style.cssText = 'position:absolute;width:100%;height:200px; overflow:auto; opacity:0.3;z-index:100;background:lightgray;bottom: 0px;left: 0px;';
+            window.document.body.appendChild(logDiv);
+        }
+        return logDiv;
+    }
+
+    windowWriter.prototype.writeLog = function (data) {
+        if (getOrCreateLogDiv()) {
+            logDiv.innerHTML += '{0} </br>'.format(data);
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+    }
 
     return windowWriter;
 });
