@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\style.css" />
     <Content Include="index.html" />
     <Content Include="js\app.js" />
     <Content Include="js\logger\alertWriter.js" />
@@ -64,6 +65,7 @@
     <Content Include="js\logger\baseWriter.js" />
     <Content Include="js\logger\consoleWriter.js" />
     <Content Include="js\logger\windowWriter.js" />
+    <Content Include="js\loggerExt\loggerExt.js" />
     <Content Include="js\require.js" />
     <Content Include="js\logger\utils.js" />
     <Content Include="Web.config" />
